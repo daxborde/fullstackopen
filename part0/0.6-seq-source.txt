@@ -1,0 +1,18 @@
+# https://www.websequencediagrams.com/
+note over browser:
+user enters a "testnote" into the 
+box and presses submit
+end note
+
+note over browser:
+the note is added to the local HTML 
+code and the page is rerendered
+end note
+
+note over browser:
+the note is sent to to the server
+for other clients to see
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa (with data {"content":"testnote2",...})
+server-->browser: {"message":"note created"}
