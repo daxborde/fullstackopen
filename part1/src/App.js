@@ -1,6 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
-
 const App = () => (
   <div>
     <p>Hello world</p>
