@@ -2,22 +2,34 @@ import React, { useState } from 'react'
 
 const App = () => {
   const mapping = {
-    good: 0,
-    neutral: 1,
-    bad: 2,
+    good: 'G',
+    neutral: 'N',
+    bad: 'B',
   }
-  const [ history, updateHistory ] = useState([]);
+  // allratings is ["good", "neutral", "bad"] 
+  const allratings = Object.keys(mapping);
 
-  console.log(history)
-  
+  const [history, setHistory] = useState([]);
+
+  const updateHistory = (history, setHistory, key) => setHistory(history.concat(mapping[key]));
+  const countHistory = (history, key) => history.reduce((a, x) => a + (x === mapping[key] ? 1 : 0), 0);
+
   return (
     <>
       <h1>Give Feedback</h1>
-      <button onClick={() => updateHistory(history.concat(mapping.good))}>good</button>
-      <button onClick={() => updateHistory(history.concat(mapping.neutral))}>neutral</button>
-      <button onClick={() => updateHistory(history.concat(mapping.bad))}>bad</button>
+      {
+        allratings.map((r) => (
+          <button onClick={() => updateHistory(history, setHistory, r)} key={r}>{r}</button>
+        ))
+      }
 
       <h1>Statistics</h1>
+      {
+        allratings.map((r) => (
+          <p>{r} {countHistory(history, r)}</p>
+        ))
+      }
+
       good {history.reduce((a, x) => a + (x === mapping.good ? 1 : 0), 0)} <br />
       neutral {history.reduce((a, x) => a + (x === mapping.neutral ? 1 : 0), 0)} <br />
       bad {history.reduce((a, x) => a + (x === mapping.bad ? 1 : 0), 0)} <br />
