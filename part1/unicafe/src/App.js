@@ -1,23 +1,26 @@
 import React, { useState } from 'react'
 
+const App = () => {
+  const mapping = {
+    good: 0,
+    neutral: 1,
+    bad: 2,
+  }
+  const [ history, updateHistory ] = useState([]);
 
-
-const App = () => {  
-  const [ goodc, setGoodC ] = useState(0);
-  const [ neutralc, setNeutralC ] = useState(0);
-  const [ badc, setBadC ] = useState(0);
-
+  console.log(history)
+  
   return (
     <>
       <h1>Give Feedback</h1>
-      <button onClick={() => setGoodC(goodc + 1)}>good</button>
-      <button onClick={() => setNeutralC(neutralc + 1)}>neutral</button>
-      <button onClick={() => setBadC(badc + 1)}>bad</button>
+      <button onClick={() => updateHistory(history.concat(mapping.good))}>good</button>
+      <button onClick={() => updateHistory(history.concat(mapping.neutral))}>neutral</button>
+      <button onClick={() => updateHistory(history.concat(mapping.bad))}>bad</button>
 
       <h1>Statistics</h1>
-      good {goodc} <br />
-      neutral {neutralc} <br />
-      bad {badc} <br />
+      good {history.reduce((a, x) => a + (x === mapping.good ? 1 : 0), 0)} <br />
+      neutral {history.reduce((a, x) => a + (x === mapping.neutral ? 1 : 0), 0)} <br />
+      bad {history.reduce((a, x) => a + (x === mapping.bad ? 1 : 0), 0)} <br />
     </>
   )
 }
