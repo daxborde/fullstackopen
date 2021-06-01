@@ -29,10 +29,6 @@ const App = () => {
           <p>{r} {countHistory(history, r)}</p>
         ))
       }
-
-      good {history.reduce((a, x) => a + (x === mapping.good ? 1 : 0), 0)} <br />
-      neutral {history.reduce((a, x) => a + (x === mapping.neutral ? 1 : 0), 0)} <br />
-      bad {history.reduce((a, x) => a + (x === mapping.bad ? 1 : 0), 0)} <br />
     </>
   )
 }
