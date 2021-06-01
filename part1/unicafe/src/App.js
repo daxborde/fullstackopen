@@ -1,5 +1,22 @@
 import React, { useState } from 'react'
 
+const Statistics = ({mapping, history}) => {
+  // allratings is ["good", "neutral", "bad"]
+  const allratings = Object.keys(mapping);
+  const countHistory = (history, key) => history.reduce((a, x) => a + (x === mapping[key] ? 1 : 0), 0);
+
+  return (
+    <>
+      <h1>Statistics</h1>
+      {
+        allratings.map((r) => (
+          <p>{r} {countHistory(history, r)}</p>
+        ))
+      }
+    </>
+  )
+}
+
 const App = () => {
   const mapping = {
     good: 'G',
@@ -12,8 +29,7 @@ const App = () => {
   const [history, setHistory] = useState([]);
 
   const updateHistory = (history, setHistory, key) => setHistory(history.concat(mapping[key]));
-  const countHistory = (history, key) => history.reduce((a, x) => a + (x === mapping[key] ? 1 : 0), 0);
-
+  
   return (
     <>
       <h1>Give Feedback</h1>
@@ -23,12 +39,7 @@ const App = () => {
         ))
       }
 
-      <h1>Statistics</h1>
-      {
-        allratings.map((r) => (
-          <p>{r} {countHistory(history, r)}</p>
-        ))
-      }
+      <Statistics mapping={mapping} history={history} />
     </>
   )
 }
