@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
-const Statistics = ({mapping, history}) => {
+const Statistics = ({ mapping, history }) => {
   // allratings is ["good", "neutral", "bad"]
   const allratings = Object.keys(mapping);
   const countHistory = (history, key) => history.reduce((a, x) => a + (x === mapping[key] ? 1 : 0), 0);
+
+  const average = (countHistory(history, "good") - countHistory(history, "bad")) / history.length
 
   return (
     <>
@@ -13,6 +15,10 @@ const Statistics = ({mapping, history}) => {
           <p>{r} {countHistory(history, r)}</p>
         ))
       }
+
+      <p>all {history.length}</p>
+
+      <p>average {average}</p>
     </>
   )
 }
@@ -29,7 +35,7 @@ const App = () => {
   const [history, setHistory] = useState([]);
 
   const updateHistory = (history, setHistory, key) => setHistory(history.concat(mapping[key]));
-  
+
   return (
     <>
       <h1>Give Feedback</h1>
