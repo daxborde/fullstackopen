@@ -8,6 +8,7 @@ const Statistics = ({ mapping, history }) => {
   const numbad = countHistory(history, "bad")
 
   const average = (numgood - numbad) / history.length
+  const positive = numgood / history.length
 
   return (
     <>
@@ -18,6 +19,7 @@ const Statistics = ({ mapping, history }) => {
       <p>bad {numbad}</p>
       <p>all {history.length}</p>
       <p>average {average}</p>
+      <p>positive %{positive * 100}</p>
     </>
   )
 }
