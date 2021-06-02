@@ -1,23 +1,22 @@
 import React, { useState } from 'react'
 
 const Statistics = ({ mapping, history }) => {
-  // allratings is ["good", "neutral", "bad"]
-  const allratings = Object.keys(mapping);
   const countHistory = (history, key) => history.reduce((a, x) => a + (x === mapping[key] ? 1 : 0), 0);
 
-  const average = (countHistory(history, "good") - countHistory(history, "bad")) / history.length
+  const numgood = countHistory(history, "good")
+  const numneutral = countHistory(history, "neutral")
+  const numbad = countHistory(history, "bad")
+
+  const average = (numgood - numbad) / history.length
 
   return (
     <>
       <h1>Statistics</h1>
-      {
-        allratings.map((r) => (
-          <p>{r} {countHistory(history, r)}</p>
-        ))
-      }
-
+      
+      <p>good {numgood}</p>
+      <p>neutral {numneutral}</p>
+      <p>bad {numbad}</p>
       <p>all {history.length}</p>
-
       <p>average {average}</p>
     </>
   )
