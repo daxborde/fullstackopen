@@ -32,8 +32,6 @@ const App = () => {
     neutral: 'N',
     bad: 'B',
   }
-  // allratings is ["good", "neutral", "bad"] 
-  const allratings = Object.keys(mapping);
 
   const [history, setHistory] = useState([]);
 
@@ -42,11 +40,9 @@ const App = () => {
   return (
     <>
       <h1>Give Feedback</h1>
-      {
-        allratings.map((r) => (
-          <button onClick={() => updateHistory(history, setHistory, r)} key={r}>{r}</button>
-        ))
-      }
+      <button onClick={() => updateHistory(history, setHistory, "good")}>good</button>
+      <button onClick={() => updateHistory(history, setHistory, "neutral")}>neutral</button>
+      <button onClick={() => updateHistory(history, setHistory, "bad")}>bad</button>
 
       <h1>Statistics</h1>
       <Statistics mapping={mapping} history={history} />
