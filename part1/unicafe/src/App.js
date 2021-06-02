@@ -4,6 +4,13 @@ const Button = ({text, onClick}) => (
   <button onClick={onClick}>{text}</button>
 )
 
+const Statistic = ({text, value}) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+)
+
 const Statistics = ({ mapping, history }) => {
   if (history.length === 0) {
     return <p>No feedback given</p>
@@ -19,14 +26,16 @@ const Statistics = ({ mapping, history }) => {
   const positive = numgood / history.length
 
   return (
-    <div>
-      <p>good {numgood}</p>
-      <p>neutral {numneutral}</p>
-      <p>bad {numbad}</p>
-      <p>all {history.length}</p>
-      <p>average {average}</p>
-      <p>positive %{positive * 100}</p>
-    </div>
+    <table>
+      <tbody>
+        <Statistic text={"good"} value={numgood} />
+        <Statistic text={"neutral"} value={numneutral} />
+        <Statistic text={"bad"} value={numbad} />
+        <Statistic text={"all"} value={history.length} />
+        <Statistic text={"average"} value={average} />
+        <Statistic text={"positive"} value={`${positive * 100}%`} />
+      </tbody>
+    </table>
   )
 }
 
