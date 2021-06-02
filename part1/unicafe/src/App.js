@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 
+const Button = ({text, onClick}) => (
+  <button onClick={onClick}>{text}</button>
+)
+
 const Statistics = ({ mapping, history }) => {
   if (history.length === 0) {
     return <p>No feedback given</p>
@@ -40,9 +44,9 @@ const App = () => {
   return (
     <>
       <h1>Give Feedback</h1>
-      <button onClick={() => updateHistory(history, setHistory, "good")}>good</button>
-      <button onClick={() => updateHistory(history, setHistory, "neutral")}>neutral</button>
-      <button onClick={() => updateHistory(history, setHistory, "bad")}>bad</button>
+      <Button onClick={() => updateHistory(history, setHistory, "good")} text={"good"} />
+      <Button onClick={() => updateHistory(history, setHistory, "neutral")} text={"neutral"} />
+      <Button onClick={() => updateHistory(history, setHistory, "bad")} text={"bad"} />
 
       <h1>Statistics</h1>
       <Statistics mapping={mapping} history={history} />
