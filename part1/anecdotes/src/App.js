@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const registerVote = (points, setPoints, selected) => {
+function registerVote(points, setPoints, selected) {
   const copy = [...points]
   copy[selected] += 1
   setPoints(copy)
