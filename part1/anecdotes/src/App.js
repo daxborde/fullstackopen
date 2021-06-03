@@ -6,6 +6,12 @@ const registerVote = (points, setPoints, selected) => {
   setPoints(copy)
 }
 
+function argmax(arr) {
+  return arr.reduce((a, x, i, arr) => x > arr[a] ? i : a, 0)
+}
+
+const Score = ({score}) => <p>This anecdote has {score} vote{score === 1 ? "" : "s"}</p>
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -21,14 +27,21 @@ const App = () => {
   const [selected, setSelected] = useState(random_index())
   const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
 
+  const best = argmax(points)
+
   return (
     <>
+      <h1>Anecdote of the Day</h1>
       <p>{anecdotes[selected]}</p>
-      <p>This anecdote has {points[selected]} vote{points[selected] === 1 ? "" : "s"}</p>
+      <Score score={points[selected]} />
       <p>
         <button onClick={() => registerVote(points, setPoints, selected)}>vote</button>
         <button onClick={() => setSelected(random_index())}>next anecdote</button>
       </p>
+      
+      <h1>Anecdote with Most Votes</h1>
+      <p>{anecdotes[best]}</p>
+      <Score score={points[best]} />
     </>
   )
 }
