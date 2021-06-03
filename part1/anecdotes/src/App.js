@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
 
+const registerVote = (points, setPoints, selected) => {
+  const copy = [...points]
+  copy[selected] += 1
+  setPoints(copy)
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -13,11 +19,16 @@ const App = () => {
   const random_index = () => Math.floor(Math.random()*anecdotes.length)
 
   const [selected, setSelected] = useState(random_index())
+  const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
 
   return (
     <>
       <p>{anecdotes[selected]}</p>
-      <p><button onClick={() => setSelected(random_index())}>next anecdote</button></p>
+      <p>This anecdote has {points[selected]} vote{points[selected] === 1 ? "" : "s"}</p>
+      <p>
+        <button onClick={() => registerVote(points, setPoints, selected)}>vote</button>
+        <button onClick={() => setSelected(random_index())}>next anecdote</button>
+      </p>
     </>
   )
 }
