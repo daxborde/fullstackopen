@@ -6,34 +6,16 @@ const Part = ({ part }) => (
   </p>
 )
 
-const Course = ({ course }) => {
-  // const course = {
-  //   name: 'Half Stack application development',
-  //   parts: [{
-  //     name: 'Fundamentals of React',
-  //     exercises: 10
-  //   },
-  //   {
-  //     name: 'Using props to pass data',
-  //     exercises: 7
-  //   },
-  //   {
-  //     name: 'State of a component',
-  //     exercises: 14
-  //   }]
-  // }
-
-  return (
-    <>
-      <h1>{course.name}</h1>
-      <div>
-        {course.parts.map((p) =>
-          <Part part={p} key={p.name} />
-        )}
-      </div>
-      {/* <Total course={course} /> */}
-    </>
-  )
-}
+const Course = ({ course }) => (
+  <>
+    <h1>{course.name}</h1>
+    <div>
+      {course.parts.map((p) =>
+        <Part part={p} key={p.name} />
+      )}
+    </div>
+    <p><b>Total number of exercises: {course.parts.reduce((a, p) => a + p.exercises, 0)}</b></p>
+  </>
+)
 
 export default Course
